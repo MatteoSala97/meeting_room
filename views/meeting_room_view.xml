@@ -1,0 +1,44 @@
+<odoo>
+    <record id="view_meeting_room_form" model="ir.ui.view">
+        <field name="name">meeting.room.form</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <form string="Meeting Room Reservation">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date" widget="date"/>
+                        <field name="start_time"/>
+                        <field name="end_time"/>
+                        <field name="comments" placeholder="Lascia qui un commento..."/>
+                        <field name="meeting_type" widget="radio"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_meeting_room_tree" model="ir.ui.view">
+        <field name="name">meeting.room.tree</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <tree string="Meeting Room Reservations">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="meeting_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_meeting_room" model="ir.actions.act_window">
+        <field name="name">Meeting Room Reservations</field>
+        <field name="res_model">meeting.room</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_meeting_room_tree"/>
+    </record>
+
+    <menuitem id="menu_meeting_room_root" name="Meeting Room Reservations"/>
+    <menuitem id="menu_meeting_room" name="Meeting Room Reservations" parent="menu_meeting_room_root" action="action_meeting_room"/>
+</odoo>
