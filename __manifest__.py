@@ -12,5 +12,5 @@
     'installable': True,
     'application': True,
     'auto_install': False,
-    'images': ['static/images/multiuser-icon.png']
+    'images': ['static/description/multiuser.png']
 }
