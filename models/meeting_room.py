@@ -28,3 +28,14 @@ class MeetingRoomModel(models.Model):
                 raise ValidationError("L'orario di fine deve essere compreso tra le 8:00 e le 20:00.")
             if record.start_time >= record.end_time:
                 raise ValidationError("L'orario di fine deve essere successivo all'orario di inizio.")
+
+
+ # Controller per la prenotazione multipla allo stesso orario o stesso giorno 
+ 
+            # overlapping_bookings = self.search([
+            #     ('date', '=', record.date),
+            #     ('id', '!=', record.id),
+            #     '|', '&', ('start_time', '<', record.end_time), ('end_time', '>', record.start_time)
+            # ])
+            # if overlapping_bookings:
+            #     raise ValidationError("Esiste già una prenotazione sovrapposta per questa data e ora.")
