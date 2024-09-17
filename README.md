@@ -1,1 +1,1 @@
-### This is a test module in order to create a menu to book a meeting room with day and hours.
+### This is a test module to book a meeting room with name, date and hours.
