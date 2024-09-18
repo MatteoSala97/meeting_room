@@ -6,7 +6,7 @@
             <form string="Meeting Room Reservation">
                 <sheet>
                     <group>
-                        <field name="image"/>
+                        <field name="image" widget="image" class="oe_avatar"/>
                         <field name="name"/>
                         <field name="date" widget="date"/>
                         <field name="start_time"/>
@@ -39,7 +39,6 @@
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_meeting_room_tree"/>
     </record>
-
 
     <menuitem id="menu_meeting_room_root" name="Meeting Room Reservations"/>
     <menuitem id="menu_meeting_room" name="Meeting Room Reservations" parent="menu_meeting_room_root" action="action_meeting_room"/>
