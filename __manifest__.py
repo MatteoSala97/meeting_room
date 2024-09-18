@@ -9,8 +9,9 @@
         'views/meeting_room_view.xml',
         'security/ir.model.access.csv'        
         ],
+    'images': ['static/description/multiuser.png'],
     'installable': True,
     'application': True,
     'auto_install': False,
-    'images': ['static/description/multiuser.png']
+    'icon':['static/description/multiuser.png']   
 }
