@@ -15,6 +15,7 @@ class MeetingRoomModel(models.Model):
         ('interview', 'Colloquio'),
         ('meeting', 'Riunione')
     ], string="Destinazione di utilizzo", required=True, default='meeting')
+    image = fields.Image(string="Image")
 
 
     # Questo è un controller dell'orario. Se la prenotazione è precedente o successiva all'orario di lavoro non permette all'utente di salvarla.
