@@ -10,15 +10,18 @@ class MeetingRoomModel(models.Model):
     start_time = fields.Float(string='Ora di inizio', required=True)
     end_time = fields.Float(string='Ora di fine', required=True)
     comments = fields.Char(string="Commenti", placeholder="Lascia qui un commento...")
+    
     # Radio button per la selezione
     meeting_type = fields.Selection([
         ('interview', 'Colloquio'),
         ('meeting', 'Riunione')
     ], string="Destinazione di utilizzo", required=True, default='meeting')
+    
+    
     image = fields.Image(string="Image")
 
 
-    # Questo è un controller dell'orario. Se la prenotazione è precedente o successiva all'orario di lavoro non permette all'utente di salvarla.
+    #### Questo è un controller dell'orario. Se la prenotazione è precedente o successiva all'orario di lavoro non permette all'utente di salvarla. ####
      
     @api.constrains('start_time', 'end_time')
     def _check_time(self):
@@ -30,13 +33,16 @@ class MeetingRoomModel(models.Model):
             if record.start_time >= record.end_time:
                 raise ValidationError("L'orario di fine deve essere successivo all'orario di inizio.")
 
-
- # Controller per la prenotazione multipla allo stesso orario o stesso giorno 
- 
-            # overlapping_bookings = self.search([
-            #     ('date', '=', record.date),
-            #     ('id', '!=', record.id),
-            #     '|', '&', ('start_time', '<', record.end_time), ('end_time', '>', record.start_time)
-            # ])
-            # if overlapping_bookings:
-            #     raise ValidationError("Esiste già una prenotazione sovrapposta per questa data e ora.")
+    #### Questo è un controller per far si che non possano esserci prenotazioni per date precedenti alla data odierna ####
+     
+    # Aggiungo  l'import (di solito sta in cima alla pagina)
+    from datetime import date
+     
+    @api.contrains('date')
+    def _check_date(self):
+        for record in self:
+            #Definisco che se la data selezionata dall'utente è precedente alla data odierna non accetta la prenotazione
+            if record.date < fields.Date.today():
+                raise ValidationError("Non è possibile prenotare per date passate. Seleziona la data odierna o una data futura.")
+            
+            
