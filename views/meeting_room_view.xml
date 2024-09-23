@@ -35,7 +35,7 @@
             </tree>
         </field>
     </record>
-        #Action
+        # Action
     <record id="action_meeting_room" model="ir.actions.act_window">
         <field name="name">Meeting Room Reservations</field>
         <field name="res_model">meeting.room</field>
@@ -43,7 +43,7 @@
         <field name="view_id" ref="view_meeting_room_tree"/>
     </record>
 
-    # Vista KANBAN per il secondary menu
+    # Vista Kanban per il Secondary Menu
     <record id="view_meeting_room_kanban" model="ir.ui.view">
         <field name="name">meeting.room.kanban</field>
         <field name="model">meeting.room</field>
@@ -56,25 +56,37 @@
                             <strong><field name="name"/></strong>
                             <div><field name="date"/></div>
                             <div><field name="start_time"/> - <field name="end_time"/></div>
+                            <a type="delete" class="oe_kanban_action oe_kanban_action_delete"
+                               href="#" title="Delete"
+                               t-att-data-id="record.id">
+                               <i class="fa fa-trash"/>
+                            </a>
                         </div>
                     </t>
                 </templates>
             </kanban>
         </field>
-    </record>    
-    
-    # Azione per il secondary menu 
+    </record>
+
+    # Azione per il Secondary Menu
     <record id="action_secondary_menu" model="ir.actions.act_window">
         <field name="name">Secondary Menu</field>
         <field name="res_model">meeting.room</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="view_id" ref="view_meeting_room_kanban"/>
     </record>
-    
 
+    # Server action to delete record
+    <record id="action_delete_reservation" model="ir.actions.server">
+        <field name="name">Delete Reservation</field>
+        <field name="model_id" ref="model_meeting_room"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = env['meeting.room'].browse(env.context.get('active_ids')).unlink()
+        </field>
+    </record>
 
-    # ---Menu items---
-
+    # Menu Items 
     <menuitem id="menu_meeting_room_root" name="Meeting Room Reservations"/>
     <menuitem id="menu_meeting_room" name="Meeting Room Reservations" parent="menu_meeting_room_root" action="action_meeting_room"/>
     <menuitem id="secondary_menu" name="Secondary Menu" parent="menu_meeting_room_root" action="action_secondary_menu"/>
