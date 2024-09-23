@@ -1,4 +1,6 @@
 <odoo>
+    #Vista del modulo Meeting Room 
+        #Vista form
     <record id="view_meeting_room_form" model="ir.ui.view">
         <field name="name">meeting.room.form</field>
         <field name="model">meeting.room</field>
@@ -19,6 +21,7 @@
         </field>
     </record>
 
+        #Vista tree
     <record id="view_meeting_room_tree" model="ir.ui.view">
         <field name="name">meeting.room.tree</field>
         <field name="model">meeting.room</field>
@@ -32,7 +35,7 @@
             </tree>
         </field>
     </record>
-
+        #Action
     <record id="action_meeting_room" model="ir.actions.act_window">
         <field name="name">Meeting Room Reservations</field>
         <field name="res_model">meeting.room</field>
@@ -40,7 +43,7 @@
         <field name="view_id" ref="view_meeting_room_tree"/>
     </record>
 
-    # Vista per il secondary menu
+    # Vista KANBAN per il secondary menu
     <record id="view_meeting_room_kanban" model="ir.ui.view">
         <field name="name">meeting.room.kanban</field>
         <field name="model">meeting.room</field>
