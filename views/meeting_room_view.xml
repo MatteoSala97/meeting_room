@@ -40,6 +40,40 @@
         <field name="view_id" ref="view_meeting_room_tree"/>
     </record>
 
+    # Vista per il secondary menu
+    <record id="view_meeting_room_kanban" model="ir.ui.view">
+        <field name="name">meeting.room.kanban</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                            <strong><field name="name"/></strong>
+                            <div><field name="date"/></div>
+                            <div><field name="start_time"/> - <field name="end_time"/></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>    
+    
+    # Azione per il secondary menu 
+    <record id="action_secondary_menu" model="ir.actions.act_window">
+        <field name="name">Secondary Menu</field>
+        <field name="res_model">meeting.room</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="view_meeting_room_kanban"/>
+    </record>
+    
+
+
+    # ---Menu items---
+
     <menuitem id="menu_meeting_room_root" name="Meeting Room Reservations"/>
     <menuitem id="menu_meeting_room" name="Meeting Room Reservations" parent="menu_meeting_room_root" action="action_meeting_room"/>
+    <menuitem id="secondary_menu" name="Secondary Menu" parent="menu_meeting_room_root" action="action_secondary_menu"/>
+
 </odoo>
