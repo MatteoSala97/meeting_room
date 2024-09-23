@@ -1,6 +1,9 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
+# Aggiungo  l'import (per riga 38)
+from datetime import date
+
 class MeetingRoomModel(models.Model):
     _name = 'meeting.room'
     _description = 'Modulo di test per prenotazione sala riunioni'
@@ -35,10 +38,7 @@ class MeetingRoomModel(models.Model):
 
     #### Questo è un controller per far si che non possano esserci prenotazioni per date precedenti alla data odierna ####
      
-    # Aggiungo  l'import (di solito sta in cima alla pagina)
-    from datetime import date
-     
-    @api.contrains('date')
+    @api.constrains('date')
     def _check_date(self):
         for record in self:
             #Definisco che se la data selezionata dall'utente è precedente alla data odierna non accetta la prenotazione
